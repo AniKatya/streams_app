@@ -5,6 +5,7 @@ import {
   DELETE_STREAM,
   EDIT_STREAM,
 } from "../actions/types";
+var _ = require('lodash');
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -15,7 +16,7 @@ export default (state = {}, action) => {
     case EDIT_STREAM:
       return { ...state, [action.payload.id]: action.payload };
     case FETCH_STREAMS:
-        return action.payload;
+        return {...state,..._.mapKeys(action.payload, 'id')}
     default:
       return state;
   }
